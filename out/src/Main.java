@@ -45,19 +45,31 @@ public class  Main extends OOPGraphics {
                     break;
 
             case "turnleft":
-                turnLeft(parameter);
+                if (parameter <= 01)
+                    System.out.println("Parameter invalid :(");
+                else
+                    turnLeft(parameter);
                 break;
 
                 case "turnright":
-                    turnRight(parameter);
+                    if (parameter <= 01)
+                        System.out.println("Parameter invalid :(");
+                    else
+                        turnRight(parameter);
                     break;
 
             case "forward":
+                if (parameter <= 01)
+                    System.out.println("Parameter invalid :(");
+                else
                     forward(parameter);
-                    break;
+                break;
 
                     case "backward":
-                        forward(parameter * -1);
+                        if (parameter <= 01)
+                            System.out.println("Parameter invalid :(");
+                        else
+                            forward(parameter * -1);
                         break;
 
             case "black":
@@ -89,7 +101,9 @@ public class  Main extends OOPGraphics {
                 clear();
                 break;
 
-
+            default:
+                System.out.println("Invalid command - does not exist :( ");
+                break;
         }
 
     }
