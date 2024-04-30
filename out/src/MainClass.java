@@ -1,10 +1,7 @@
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileWriter;
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import uk.ac.leedsbeckett.oop.OOPGraphics;
 
@@ -19,24 +16,18 @@ public class  MainClass extends OOPGraphics {
         MainClassFrame.add(this);
         MainClassFrame.pack();
         MainClassFrame.setVisible(true);
-        this.about(); //comment this out for testing to stop the oop animation
+        this.about();
+    }
+
+    @Override
+    public void about() {
+        displayMessage("Dan's cool turtle swag");
+        super.about();
     }
 
     public void processCommand(String command) {
         String[] sections = command.split(" ");
         String commandString = sections[0];
-
-        if(sections[0].equals("saveimage")) {
-            try {
-                BufferedImage image = getBufferedImage();
-                File outputfile = new File(sections[1]) + ".png";
-                ImageIO.write(image, "png", outputfile);
-            }
-            catch (Exception e) {
-                System.out.println("Error saving image :(");
-            }
-        }
-
 
         int parameter = 0;
 
@@ -46,6 +37,7 @@ public class  MainClass extends OOPGraphics {
             }
             catch (NumberFormatException e) {
                 System.out.println("Invalid parameter :(" + sections[1]);
+                displayMessage("Invalid paeameter :( " + sections[1]);
                 return;
             }
         }
@@ -64,29 +56,37 @@ public class  MainClass extends OOPGraphics {
                 break;
 
             case "turnleft":
-                if (parameter <= 01)
+                if (parameter <= 01) {
+                    displayMessage("Parameter invalid :(");
                     System.out.println("Parameter invalid :(");
+                }
                 else
                     turnLeft(parameter);
                 break;
 
             case "turnright":
-                if (parameter <= 01)
+                if (parameter <= 01) {
+                    displayMessage("Parameter invalid :(");
                     System.out.println("Parameter invalid :(");
+                }
                 else
                     turnRight(parameter);
                 break;
 
             case "forward":
-                if (parameter <= 01)
+                if (parameter <= 01) {
+                    displayMessage("Parameter invalid :(");
                     System.out.println("Parameter invalid :(");
+                }
                 else
                     forward(parameter);
                 break;
 
             case "backward":
-                if (parameter <= 01)
+                if (parameter <= 01) {
+                    displayMessage("Parameter invalid :(");
                     System.out.println("Parameter invalid :(");
+                }
                 else
                     forward(parameter * -1);
                 break;
@@ -120,11 +120,59 @@ public class  MainClass extends OOPGraphics {
                 clear();
                 break;
 
+            case "square":
+                if (parameter <= 01) {
+                    displayMessage("Parameter invalid :(");
+                    System.out.println("Parameter invalid :(");
+                }
+                else {
+                    for (int i = 0; i < 4; i++) {
+                        forward(parameter);
+                        turnRight(90);
+                    }
+                }
+                break;
+
+            case "colour":
+                Color colour = new Color(Integer.parseInt(sections[1]), Integer.parseInt(sections[2]), Integer.parseInt(sections[3]));
+                setPenColour(colour);
+                break;
+
+            case "penwidth":
+                setStroke(parameter);
+                break;
+
+            case "triangle":
+                if (parameter <= 01) {
+                    displayMessage("Parameter invalid :(");
+                    System.out.println("Parameter invalid :(");
+                }
+                else {
+                for (int i = 0; i < 3; i++) {
+                    forward(parameter);
+                    turnRight(120);
+                }
+                }
+                break;
+
             default:
                 System.out.println("Invalid command - does not exist :( ");
                 break;
         }
 
 
+        class SavedCommands {
+            public String[] SavedCommands = new String[0];
+
+            public void add (String command) {
+                String[] temporary = new String[SavedCommands.length + 1];
+                for (int i = 0; i < SavedCommands.length; i++) {
+                    temporary[i] = SavedCommands[i];
+                }
+                temporary[SavedCommands.length] = command;
+                SavedCommands = temporary;
+            }
+
+        }
     }
 }
