@@ -37,7 +37,7 @@ public class  MainClass extends OOPGraphics {
             }
             catch (NumberFormatException e) {
                 System.out.println("Invalid parameter :(" + sections[1]);
-                displayMessage("Invalid paeameter :( " + sections[1]);
+                displayMessage("Invalid parameter :( " + sections[1]);
                 return;
             }
         }
@@ -133,7 +133,7 @@ public class  MainClass extends OOPGraphics {
                 }
                 break;
 
-            case "colour":
+            case "pen":
                 Color colour = new Color(Integer.parseInt(sections[1]), Integer.parseInt(sections[2]), Integer.parseInt(sections[3]));
                 setPenColour(colour);
                 break;
@@ -156,6 +156,7 @@ public class  MainClass extends OOPGraphics {
                 break;
 
             default:
+                displayMessage("Parameter invalid :(");
                 System.out.println("Invalid command - does not exist :( ");
                 break;
         }
