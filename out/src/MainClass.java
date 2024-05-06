@@ -114,6 +114,8 @@ public class  MainClass extends OOPGraphics {
 
             case "reset":
                 reset();
+                setPenColour(Color.red);
+                setStroke(1);
                 break;
 
             case "clear":
